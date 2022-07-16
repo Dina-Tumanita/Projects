@@ -1,0 +1,36 @@
+@startuml FirstProject
+class Menu
+class GameStatistics
+class PlayerStatistics
+
+Project *-down-> Menu
+
+Menu *-down-> CRUD
+Menu *-down-> TicTacToepkg
+Menu *-down-> HangManpkg
+Menu *-down-> PlayerStatistics
+Menu *-down-> GameStatistics
+
+GameStatistics ..down-> TicTacToepkg
+GameStatistics ..down-> Player
+PlayerStatistics ..down-> TicTacToepkg
+GameStatistics ..down-> HangManpkg
+PlayerStatistics ..down-> HangManpkg
+
+HangManpkg *-down-> Player
+HangManpkg *-down-> Dice
+TicTacToepkg *-down-> Player
+TicTacToepkg *-down-> Dice
+
+CRUD ..> Player
+CRUD ..> TicTacToepkg
+CRUD ..> HangManpkg
+
+Player -down-> PlayerStatistics
+Player ..> Dice
+
+Human -up-|> Player
+Bot -up-|> Player
+
+
+@enduml

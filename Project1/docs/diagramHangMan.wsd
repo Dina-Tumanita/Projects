@@ -1,0 +1,23 @@
+@startuml diagramHangMan
+
+HangMan *-> "2" Player
+HangMan *-down-> TurnHM
+HangMan *-down-> HangedMan
+
+HangedMan *-> Player
+HangedMan *-down-> SecretWord 
+
+TurnHM -down-> Player
+
+GuessingPlayer -up-|> Player
+InputPlayer -up-|> Player
+
+InputPlayer ..> SecretWord
+
+Player o-> EndGame
+WordGuessed -up-|> EndGame
+NoMoreTurns -up-|> EndGame
+
+EndGame ..> HangedMan
+
+@enduml
