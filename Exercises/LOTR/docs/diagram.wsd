@@ -1,0 +1,26 @@
+@startuml LOTR_dominio
+class Game
+abstract class Player
+
+Game *-down-> Dice
+Game *-down-> Turn
+Game *-down-> "2" Player
+
+Action -up-> Player
+Action -up-> Turn
+Action ..> Dice
+
+Turn ..> Player
+
+Player <|-down- Beast
+Beast <|-down- Orc
+Beast <|-down- Goblin
+
+Player <|-down- Hero
+Hero <|-down- Elf
+Hero <|-down- Hobbit
+Hero <|-down- Human
+
+Dice <.. Player
+
+@enduml

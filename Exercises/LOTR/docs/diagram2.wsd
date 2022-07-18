@@ -1,0 +1,91 @@
+@startuml LOTR
+
+class Game
+abstract class Soldier
+abstract class Beast
+abstract class Hero
+
+
+Game *-down-> Soldier
+Game *-down-> Battlefield
+Game : +play()
+
+package utils #DDDDDD {
+    class Dice{
+        +int isThrown(int times, int max)
+        -void printThrow()
+        -void printFinal()
+}
+}
+Dice <-up-* Game
+Dice <.. Soldier
+
+class Battlefield{
++ Soldier soldier
++ Dice dice
++ armyHeroes[]
++ armyBeasts[]
++int attack(Soldier soldier1, Soldier soldier2)
++turnBattlefield()
++soldierStatus()
+-getSoldier()
+}
+
+Battlefield *-up-> Soldier
+Battlefield ..> Dice
+
+abstract class Soldier{
+    +int lifepoints
+    +int armor
+    +int attackdmg
+    +int dicethrows
+    +boolean alive
+    +int attack() 
+    +defense(int attackDMG)}
+}
+package Team1 #DDDDDD {
+    Soldier <|-down- Beast
+    class Beast{
+        +int attackdmg
+    }
+    Beast <|-down- Orc
+    Beast <|-down- Goblin
+    Class Orc {   
+    +int lifepoints
+    +int armor
+    +int dicethrows
+    }
+    Class Goblin {   
+    +int lifepoints
+    +int armor
+    +int dicethrows
+    }
+}
+
+package Team2 #DDDDDD {
+    Soldier <|-down- Hero
+    class Hero{
+        +int attackdmg
+    }
+    Hero <|-down- Elf
+    Hero <|-down- Hobbit
+    Hero <|-down- Human
+    Class Human {   
+    +int lifepoints
+    +int armor
+    +int dicethrows
+    }
+    Class Elf {   
+    +int lifepoints
+    +int armor
+    +int dicethrows
+    }
+    Class Hobbit {   
+    +int lifepoints
+    +int armor
+    +int dicethrows
+    }
+}
+
+
+@enduml

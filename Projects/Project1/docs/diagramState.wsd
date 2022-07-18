@@ -1,0 +1,54 @@
+@startuml stateDiagram
+
+state State1 as " "
+state State2 as " "
+
+state State3 as " "
+state State31 as " "
+state State32 as " "
+state State33 as " "
+
+state State4 as " "
+state State41 as " "
+state State42 as " "
+state State43 as " "
+
+state State5 as " "
+state State51 as " "
+state State52 as " "
+state State53 as " "
+
+state State6 as " "
+state State7 as " "
+
+
+[*] --> State1    : Project1
+State1 -down-> State2 : Menu
+State2 -down-> State3 : TicTacToe
+State2 -down-> State4 : HangMan
+State2 -down-> State5 : CRUD
+State2 -down-> State6 : PlayerStatistics
+State2 -down-> State7 : GameStatistics
+
+State2 -up-> State1 : Exit
+
+State3 --> State31 : Play Turn
+State31 --> State32 : Put X
+State32 --> State31 : Put O
+State31 --> State33 : Check Win
+State32 --> State33 : Win
+State33 -up-> State2 : Finish Game
+
+State4 --> State41 : Play Turn
+State41 --> State43 : Guess Word
+State41 --> State42 : Get Secret Word
+State42 --> State41 : Give Word
+State43 --> State42 : Check Word
+State43 -up-> State2 : Finish Game
+
+State5 --> State51 : Show Players
+State51 -up-> State5 : Exit
+State5 --> State52 : Edit Players
+State52 -up-> State5 : Exit
+
+@enduml

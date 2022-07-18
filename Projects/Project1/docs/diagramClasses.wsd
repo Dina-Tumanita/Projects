@@ -1,0 +1,205 @@
+@startuml diagramClasses
+
+class Project{
+    - Menu menu
+    - play() : Menu
+}
+Project *-down-> Menu
+
+class Menu{
+    - Player[10] players
+    - TicTacToe tictactoe
+    - CRUD crud
+    - HangMan hangman
+    - GameStatistics gameStats
+    - PlayerStatistics playerStats
+    - Reader read
+    - int[2] currentPlayers
+    + play()
+    - printMenu()
+    - playTicTacToe(Player player1, Player player2)
+    - playHangMan(Player player1, Player player2)
+    - showPlayerStats()
+    - showGameStats()
+    - showCRUD()
+    - menuOptions()
+    - executeOption(int option)
+
+}
+
+
+package TICTACTOE{
+Menu *-down-> TicTacToe
+class TicTacToe{
+    + Player player1
+    + Player player2
+    + int bestPlayer
+    + int gamesPlayed
+    - Board board
+}
+TicTacToe *-down-> TurnTTT
+TicTacToe *-down-> Board
+
+class TurnTTT{
+    - Board board
+    + firstTurn()
+    + playTurn()
+}
+
+class Board{
+    + Piece[3][3] square
+    + checkBoard()
+    + placePiece()
+    + printBoard()
+    + checkWinner()
+}
+Board *-down-> Piece
+
+enum Piece{
+    + X
+    + O
+    + Null
+}
+}
+
+package HANGMAN{
+Menu *-down-> HangMan
+class HangMan{
+    - HangedMan hangman
+    + secretWord
+    + play(Player player 1, Player player2)
+}
+HangMan *-down-> TurnHM
+HangMan *-down-> HangedMan
+
+class HangedMan{
+    - TurnHM turn
+    - Reader read 
+    - int playerCounter
+    - int BODY_SEGMENTS
+    - String secretWord
+    - String secretWordarray
+    - String guessingWordarray
+    - int hangmanParts
+    - boolean gaming
+    - String[6] hangedMan
+    + startGame(Player player1, Player player2)
+    - cleanGame()
+    - askSecretWord(Player player)
+    - guessWord(Player player, Player p2)
+    - printHangMan()
+    - checkWord(char letter)
+    - editHangedMan()
+}
+
+class TurnHM{
+    - Dice dice
+    + playTurn()
+    + firstTurn(Player p1, Player p2)
+    + checkWin(Player p1, Player p2, int hangmanParts)
+    + placeLetter(char[] secretWordarray, char[] guessingWordarray)
+    + int checkExisting(String word, char letter)
+}
+}
+
+package menuOptions{
+
+Menu *-down-> CRUD
+Menu *-down-> GameStatistics
+Menu *-down-> PlayerStatistics 
+
+class GameStatistics{
+    + Player[10] players
+    + showStats()
+    - getStats()
+}
+class PlayerStatistics{
+    + Player[10] players
+    + showStats(Player[] players)
+    - playerStats(Player player)
+    - Crud crud
+    - Reader reader
+}
+
+class CRUD{
+    + int[2] playerPositions(int positionP1, int positionP2)
+    + bootPlayers(Player[] players)
+    + printMenu()
+    + int[2] getPlayerPositions()
+    + printPlayers(Player[] players)
+    - selectPlayers(Player[] player)
+    - createPlayer(Player[] players)
+    - editPlayer(Player player)
+    - int howManyPlayers(Player[] players)
+    - editOptions(Player[] players)
+    - executeOption(int option, Player[] players)
+    - menuOptions()
+    + int maxOptions
+    - Reader read
+    - createPlayer()
+    - printPlayers()
+    - editPlayer()
+}
+}
+GameStatistics ..-> TicTacToe
+GameStatistics ..-> HangMan
+
+
+package utils{
+class Player{
+    - Reader read
+    + String name
+    + int wins
+    + int losses
+    + int wonTTT
+    + int wonHG
+    + int lostTTT
+    + int lostHM
+    + int gamesPlayed
+    + sendPlayInt()
+    + sendPlayString()
+}
+Player o-> Piece
+Player o-down-> Board
+Player o-down-> HangedMan
+
+class Bot{
+    + sendPlay()
+}
+Bot -up-|> Player
+Bot o-down-> Dice
+
+class Human{
+    + sendPlay()
+}
+Human -up-|> Player
+
+class Dice{
+    - Random random
+    - int thrown
+    + isThrown()
+    - printThrow()
+}
+Menu *-down-> Reader
+
+class Reader{
+    - Scanner scanner
+    + int setOption(String msg, int limit)
+    + char[] string2Char(String word)
+}
+}
+TurnTTT o-> Dice
+TurnHM o-down-> Dice
+TicTacToe ..> Reader
+HangMan ..> Reader
+
+GameStatistics ..-> Player
+PlayerStatistics ..-> Player
+CRUD ..> Player
+Menu *-down-> Player
+HangMan *-> Player
+TicTacToe *-> Player
+TurnTTT -down-> Player
+TurnHM -down-> Player
+
+@enduml
