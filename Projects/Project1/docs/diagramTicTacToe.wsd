@@ -1,0 +1,28 @@
+@startuml TicTacToe
+
+TicTacToe *-> Player
+TicTacToe *-> Dice
+TicTacToe *-down-> "3x3" Board
+TicTacToe *-down-> TurnTTT
+TurnTTT -down-> Player
+TurnTTT ..> Dice
+
+Player ..> Dice
+Player o-> Goal
+Player o-> Piece
+
+Win -up-|> Goal
+Goal ..> Board
+
+Board *-up-> Player
+Board *-down-> "3x3" Square
+Square *-down-> "1" Piece
+
+X -up-|> Piece
+O -up-|> Piece
+Null -up-|> Piece
+
+Bot -up-|> Player
+Human -up-|> Player
+
+@enduml

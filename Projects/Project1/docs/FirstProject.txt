@@ -1,0 +1,32 @@
+Para este proyecto debera tener un menú que le permita realizar lo siguiente:
+Administración de los jugadores (CRUD)
+Estadística de los jugadores
+Estadística de los juegos (opcional)
+TicTacTow
+Ahorcado
+
+
+* TicTacToe: Debe seleccionar dos jugadores, Aleatoriamente seleccionar el jugador que inicia. A modo de justicia al terminar la partida sin importar el resultado debe realir un segundo juego invirtiendo los jugadores. Las X siempre empiezan. 
+
+*Debe permitir que los jugadores tiren dos dados, de la siguiente manera: 
+El primer jugador tira un dado
+El segundo tira el primer dado
+El primer jugador tira el segundo
+El segundo jugador tira el dado 
+El que tire el dado mayor inicia. 
+El jugador que tenga la puntuación más alta decide si ser el que adivina o selecciona la palabra. 
+Al finalizar la partida debe de realizar una segunda invirtiendo los papeles. 
+Máximo de 8 intentos (Definirlo como Constante porque puede variar)
+Una vez se puede usar una opción de una pista
+
+*El máximo de jugadores es 10, debe tener 2 jugador boot por defecto, (suficiente que sea aleatorio)
+
+Metricas
+clases 300 líneas máximo
+Parámetros 3 máximo, 2 a 0 de preferencia, constructores podemos hacer una excpeción 
+Tamaño de métodos 20 a 30 líneas máximo 
+Acoplamiento clases de 7+-2 
+
+
+Premio:
+El que en promedio tenga clases con menor cantidad de líneas gana un sticker de git. No se aceptan clases que no hagan nada.

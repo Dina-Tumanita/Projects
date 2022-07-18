@@ -1,0 +1,148 @@
+@startuml FirstProject
+
+class Project{
+    - Menu menu
+    - play() : Menu
+}
+Project *-down-> Menu
+
+class Menu{
+    + Player[10] players
+    - TicTacToe tictactoe
+    - CRUD crud
+    - HangMan hangman
+    - GameStatistics gameStats
+    - PlayerStatistics playerStats
+    + int[] currentPlayers
+    + play()
+    - printMenu()
+    - playTicTacToe(Player player1, Player player2)
+    - playHangMan(Player player1, Player player2)
+    - showPlayerStats()
+    - showGameStats()
+
+}
+Menu *-down-> CRUD
+Menu *-down-> Player
+Menu *-down-> GameStatistics
+Menu *-down-> PlayerStatistics
+
+class CRUD{
+    + Player[10] players
+    + int[2] selectPlayers(int positionP1, int positionP2)
+    + bootPlayers(Player[] players)
+    - createPlayer()
+    - printMenu()
+    - printPlayers()
+    - editPlayer()
+}
+CRUD ..> Player
+
+package TICTACTOE{
+Menu *-down-> TicTacToe
+class TicTacToe{
+    + Player player1
+    + Player player2
+    + int bestPlayer
+    + int gamesPlayed
+    - Board board
+}
+TicTacToe *-> Player
+TicTacToe *-down-> TurnTTT
+TicTacToe *-down-> Board
+
+class TurnTTT{
+    - Board board
+    + firstTurn()
+    + playTurn()
+}
+TurnTTT -down-> Player
+
+class Board{
+    + Piece[3][3] square
+    + checkBoard()
+    + placePiece()
+    + printBoard()
+    + checkWinner()
+}
+Board *-down-> Piece
+
+enum Piece{
+    + X
+    + O
+    + Null
+}
+}
+TurnTTT o-> Dice
+
+package HANGMAN{
+Menu *-down-> HangMan
+class HangMan{
+    + Player player1
+    + Player player2
+    + int bestPlayer
+    + int gamesPlayed
+    + secretWord
+    + play()
+}
+HangMan *-> Player
+HangMan *-down-> TurnHM
+HangMan *-down-> HangedMan
+
+class HangedMan{
+    + printPlay()
+    + checkWord()
+}
+
+class TurnHM{
+    + playTurn()
+    + firstTurn()
+    + placeLetter()
+}
+TurnHM -down-> Player
+}
+TurnHM o-down-> Dice
+
+class GameStatistics{
+    + Player[10] players
+    + showStats()
+    - getStats()
+}
+GameStatistics ..-> Player
+GameStatistics ..-> TicTacToe
+GameStatistics ..-> HangMan
+
+class PlayerStatistics{
+    + Player[10] players
+    + showStats()
+    - getStats()
+}
+PlayerStatistics ..-> Player
+
+class Player{
+    + String name
+    + int wins
+    + int losses
+    + int gamesPlayed
+    + putPlay()
+}
+Player o-> Piece
+Player o-down-> Board
+Player o-down-> HangedMan
+
+class Bot{
+    + sendPlay()
+}
+Bot -up-|> Player
+Bot o-down-> Dice
+
+class Human{
+    + sendPlay()
+}
+Human -up-|> Player
+
+class Dice{
+    - printThrow()
+    + isThrown()
+}
+@enduml
