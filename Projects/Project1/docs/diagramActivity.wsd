@@ -1,0 +1,69 @@
+@startuml diagramActivity
+
+start
+:Project; 
+
+repeat
+    switch (Menu)
+    case (Play TicTacToe)
+        :Play;
+        :Get Players;
+        :Choose Player for Turn 1;
+        repeat
+            :Shows Board;
+            if (Turn) then (Player X)
+                :Place X;
+            else (Player O)
+                :Place O;
+            endif
+            :Checks Board;
+        
+        repeat while(gaming)
+
+    case (Play HangMan)
+        :Get Players;
+        :Choose 1st Turn;
+        :Get secret word from player 1;
+        repeat
+        :Hangman is shown;
+        :Player 2 guess;
+        :Checks HangMan Body parts and if won;
+        repeat while(gaming)
+
+    case (CRUD)
+    repeat
+        switch (CRUD Menu)
+        case (Show Players)
+            :Shows Players;
+        case (Select Players)
+            :Select Player 1;
+            :Select Player 2;
+        case (Edit Players)
+            :Choose Player;
+            :Edit Player;
+        case (Create Player)
+            if (Players.Length < 10) then (yes)
+                :Ask new Player name;
+                :Creates new Player;
+            else (no)
+                :Players are full;
+            endif
+
+        endswitch
+    repeat while (!Exit)
+
+    case (Player Statistics)
+        :Choose Player;
+        :Show Player Stats;
+
+    case (Game Statistics)
+        :Choose Game;
+        :Show Game Stats;
+    endswitch
+repeat while (!Exit)
+
+stop
+
+
+
+@enduml

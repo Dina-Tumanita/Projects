@@ -17,9 +17,13 @@ state State5 as " "
 state State51 as " "
 state State52 as " "
 state State53 as " "
+state State54 as " "
 
 state State6 as " "
+state State61 as " "
+
 state State7 as " "
+state State71 as " "
 
 
 [*] --> State1    : Project1
@@ -30,7 +34,7 @@ State2 -down-> State5 : CRUD
 State2 -down-> State6 : PlayerStatistics
 State2 -down-> State7 : GameStatistics
 
-State2 -up-> State1 : Exit
+State2 -up-> [*] : Exit
 
 State3 --> State31 : Play Turn
 State31 --> State32 : Put X
@@ -48,7 +52,20 @@ State43 -up-> State2 : Finish Game
 
 State5 --> State51 : Show Players
 State51 -up-> State5 : Exit
-State5 --> State52 : Edit Players
+State5 --> State52 : Select Players
 State52 -up-> State5 : Exit
+State5 --> State53 : Edit Players
+State53 -up-> State5 : Exit
+State5 --> State54 : Create Player
+State54 -up-> State5 : Exit
+State5 -up-> State2 : Exit
+
+State6 --> State61 : Ask for Player
+State61 --> State6 : Show Player Stats
+State6 -up-> State2 : Exit
+
+State7 --> State71 : Ask for Game
+State71 --> State7 : Show Game Stats
+State7 -up-> State2 : Exit
 
 @enduml
